@@ -82,7 +82,6 @@ void deletion(node* head ,int pos){
     }
     temp2 = temp->next;
     temp->next = temp2->next;
-
 }       
 
 int main(){
