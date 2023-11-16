@@ -1,0 +1,63 @@
+#include<stdio.h>
+#include<vector>
+#include<iostream>
+
+using namespace std;
+
+class maxheap{
+    
+    private:
+
+    int size = 0;
+    vector <int> vect = {-1};
+    int parent(int i) { return i/2;};
+    int left(int i) { return 2*i;};
+    int right(int i) {return 2*i+1;};
+
+    public:
+    
+    bool const isempty(){
+        if(size == 0){
+            return true;
+        }
+    }
+ 
+    int const getmax(){
+        return vect[1];
+    } 
+
+    void insertitem(int val){
+        vect.push_back(val); // Push the new value to the end of the vector
+        size++;
+        shiftup(size);
+        display();
+    }
+
+    void shiftup(int pos){
+        while(pos > 1 && vect[parent(pos)] < vect[pos]){
+            swap(vect[parent(pos)], vect[pos]);
+            pos = parent(pos);
+        }
+    }
+
+    void display(){
+        for (int i = 0; i < vect.size(); ++i) {
+            cout << vect[i] << " ";
+        }
+            cout << endl;
+    }
+
+};
+
+int main(){
+    cout << "Welcome to Max Heap problem : " << endl;
+    
+    maxheap m;
+    
+    m.insertitem(2);
+    m.insertitem(3);
+    m.insertitem(4);
+    m.insertitem(5);
+    
+    m.display();
+}
