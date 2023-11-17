@@ -41,7 +41,7 @@ class maxheap{
     }
 
     void shiftdown(int i) {
-        
+
         int leftChild = left(i);
         int rightChild = right(i);
         int swapId = i;
@@ -61,11 +61,13 @@ class maxheap{
     }
 
 
-    void extractmax(){
-        swap(vect[1], vect.back());
-
+    int extractmax(){
+        int max = vect[1];
+        swap(vect[1], vect[size]);
         vect.pop_back();
+        size--;
         shiftdown(1);
+        return max;
 
     }
 
@@ -83,13 +85,15 @@ int main(){
     
     maxheap m;
     
-    m.insertitem(2);
-    m.insertitem(3);
-    m.insertitem(4);
-    m.insertitem(5);
-    m.insertitem(1);
+    m.insertitem(100);
+    m.insertitem(75);
+    m.insertitem(95);
+    m.insertitem(60);
+    m.insertitem(65);
+    m.insertitem(90);
+
     
-    m.display();
+    //m.display();
 
     m.extractmax();
     m.display();
