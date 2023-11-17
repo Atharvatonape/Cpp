@@ -40,6 +40,35 @@ class maxheap{
         }
     }
 
+    void shiftdown(int i) {
+        
+        int leftChild = left(i);
+        int rightChild = right(i);
+        int swapId = i;
+
+        if (leftChild <= size && vect[leftChild] > vect[i]) {
+            swapId = leftChild;
+        }
+
+        if (rightChild <= size && vect[rightChild] > vect[swapId]) {
+            swapId = rightChild;
+        }
+
+        if (swapId != i) {
+            swap(vect[i], vect[swapId]);
+            shiftdown(swapId);
+        }
+    }
+
+
+    void extractmax(){
+        swap(vect[1], vect.back());
+
+        vect.pop_back();
+        shiftdown(1);
+
+    }
+
     void display(){
         for (int i = 0; i < vect.size(); ++i) {
             cout << vect[i] << " ";
@@ -58,6 +87,10 @@ int main(){
     m.insertitem(3);
     m.insertitem(4);
     m.insertitem(5);
+    m.insertitem(1);
     
+    m.display();
+
+    m.extractmax();
     m.display();
 }
