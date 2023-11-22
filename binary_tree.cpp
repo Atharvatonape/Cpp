@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<iostream>
+#include<queue>
 
 using namespace std;
 
@@ -43,6 +44,61 @@ void postorder(struct node* root){
     cout << root -> data << " ";
 }
 
+void levelorder(node* root){
+    if (root == NULL){
+        return;
+    }   
+    queue<node*> q;
+    q.push(root);
+    q.push(NULL);
+    int cnt = 0;
+
+    while(!q.empty()){
+        node* node = q.front();
+        q.pop();
+        if(node != NULL){
+            cout << node->data << " ";
+            if(node->left)
+                q.push(node->left);
+            if(node->right)
+                q.push(node->right);
+        }
+        else if(!q.empty()){
+            q.push(NULL);
+        }
+    }
+}
+
+int sumatk(node* root, int pos){
+    if (root == NULL){
+        return -1;
+    }   
+    queue<node*> q;
+    q.push(root);
+    q.push(NULL);
+    int total = 0, level = 0;
+
+    while(!q.empty()){
+        node* node = q.front();
+        q.pop();
+
+        if(node != NULL){
+            if(pos == level ){
+                total += node->data;
+            }
+            if(node->left)
+                q.push(node->left);
+            if(node->right)
+                q.push(node->right);
+        }
+        else if(!q.empty()){
+            q.push(NULL);
+            level++;
+        }
+    }
+    return total;
+}
+
 int main(){
 
     struct node* root = new node(1);
@@ -55,12 +111,17 @@ int main(){
     root->right->left = new node(6);
     root->right->right = new node(7);
 
-    cout << "preorder is ";
-    preorder(root);
-    cout << endl;
-    cout << "Inorder is ";
-    inorder(root);
-    cout << endl;
-    cout << "Postorder is ";
-    postorder(root);
+    levelorder(root);
+    int sum = sumatk(root , 2);
+    cout << "\n" << sum << endl; 
+
+
+    // cout << "preorder is ";
+    // preorder(root);
+    // cout << endl;
+    // cout << "Inorder is ";
+    // inorder(root);
+    // cout << endl;
+    // cout << "Postorder is ";
+    // postorder(root);
 }
