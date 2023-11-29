@@ -40,6 +40,21 @@ void inorder(struct Node* root){
     inorder(root -> right);
 }
 
+void search(struct Node* root, int val){
+    if(root == NULL){
+        cout << "Element not found \n";
+        return;
+    }
+    if(root->data == val){
+        cout << "Element found \n";
+    }
+    else if(val > root->data){
+        search(root->right, val);
+    }
+    else {
+        search(root->left, val);
+    }
+}
 
 int main(){
     cout << "This is a Binary Search tree operation \n";
@@ -54,7 +69,15 @@ int main(){
     inorder(root);
     cout << "\n";
 
+    bool yes;
+    search(root, 8);
 
+    // if(yes == true){
+    //     cout << "Value is present \n";
+    // }
+    // else{
+    //     cout << "Value not present \n";
+    // }
 
 
 }
